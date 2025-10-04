@@ -108,7 +108,10 @@ def main():
     while len(players) > 1:
         battle_members = sample(players, k=2)
         defending_player, attack_player = battle_members
-        print(f'{attack_player.name} наносит удар по {defending_player.name} на {attack_player.attack} урона.')
+        print(
+            f'{attack_player.name} наносит удар по {defending_player.name} '\
+            f'на {attack_player.attack} урона.'
+        )
         defending_player.get_damage(attack_player.attack)
         if defending_player.hp <= 0:
             players.remove(defending_player)

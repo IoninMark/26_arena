@@ -46,6 +46,12 @@ class Person:
         """Метод получения урона персонажем."""
         self.hp -= int(damage * (1 - self.protection / 100))
 
+    def dodge(self) -> bool:
+        chance = randint(0, 100)
+        if chance > 95:
+            return True
+        return False
+
 
 class Paladin(Person):
     """Класс паладина."""
@@ -112,7 +118,10 @@ def main():
             f'{attack_player.name} наносит удар по {defending_player.name} '\
             f'на {attack_player.attack} урона.'
         )
-        defending_player.get_damage(attack_player.attack)
+        if not defending_player.dodge():
+            defending_player.get_damage(attack_player.attack)
+        else:
+            print(f'{defending_player.name} увернулся!')
         if defending_player.hp <= 0:
             players.remove(defending_player)
             print(f'{defending_player.name} выбывает!')
